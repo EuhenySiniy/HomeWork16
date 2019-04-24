@@ -19,9 +19,9 @@ import javax.persistence.GenerationType;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
-@Accessors
-@Table
+@EqualsAndHashCode(exclude = {"id"})
+@Accessors(chain = true)
+@Table(name = "users")
 public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
