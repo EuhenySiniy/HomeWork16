@@ -11,9 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Optional;
 
 @WebServlet("/update")
 public class UpdateController extends HttpServlet {
+    private UserDao userDao = UserDaoImpl.getInstance();
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -23,8 +26,7 @@ public class UpdateController extends HttpServlet {
                     .forward(request, response);
         } else {
             int id = Integer.parseInt(userId);
-            UserDao userDao = UserDaoImpl.getInstance();
-            User user = userDao.findUserById(id);
+            Optional<User> user = userDao.findUserById(id);
             request.setAttribute("user", user);
             request.getRequestDispatcher("/list")
                     .forward(request, response);

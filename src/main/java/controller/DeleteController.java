@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Objects;
 
 @WebServlet("/delete")
 public class DeleteController extends HttpServlet {
+    private UserDao dao = UserDaoImpl.getInstance();
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String userId = request.getParameter("id");
-        if (Objects.equals(userId, null)) {
+        if (userId == null) {
             request.getRequestDispatcher("/list")
                     .forward(request, response);
         } else {
             int id = Integer.parseInt(userId);
-            UserDao dao = UserDaoImpl.getInstance();
             dao.deleteUser(id);
             response.sendRedirect(request.getContextPath() + "/list");
         }

@@ -3,6 +3,7 @@ package dao;
 import model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserDao {
     void saveUser(User user);
@@ -11,7 +12,7 @@ public interface UserDao {
 
     void deleteUser(int id);
 
-    User findUserById(int id);
+    Optional<User> findUserById(int id);
 
     List<User> getAllUsers();
 }

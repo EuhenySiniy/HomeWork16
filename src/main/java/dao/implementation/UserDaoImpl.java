@@ -10,6 +10,7 @@ import org.hibernate.Transaction;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
+import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
     private static volatile UserDaoImpl instance = null;
@@ -44,9 +45,9 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User findUserById(int id) {
+    public Optional<User> findUserById(int id) {
         Session session = this.sessionFactory.openSession();
-        User user = session.get(User.class, id);
+        Optional<User> user = Optional.of(session.get(User.class, id));
         session.close();
         return user;
     }
